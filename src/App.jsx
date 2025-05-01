@@ -1,26 +1,32 @@
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Footer from "./components/Footer";
+import { Suspense, lazy } from "react";
+import './App.css';
+
+import Layout from "./components/Layout";
+
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const User = lazy(() => import("./pages/User"));
+
+import Erro from "./pages/Erro";
 
 const App = () => {
   return (
-    <>
     <Router>
-    <Header/>
-    <main>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-    </main>
-    <Footer/>
-  </Router>
-  </>
+      <Suspense fallback={<p>Carregando...</p>}>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/user/:id" element={<User />} />
+            <Route path="*" element={<Erro />} />
+          </Route>
+          
+        </Routes>
+      </Suspense>
+    </Router>
   );
 };
 

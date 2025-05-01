@@ -4,8 +4,9 @@ const About = () => {
     return ( 
         <>
         <div>
-            <h1>Sobre</h1>
-        </div>
+      <h1>Sobre Nós</h1>
+      <p>Somos uma equipe apaixonada por desenvolvimento web e soluções digitais.</p>
+    </div>
         </>
      );
 }
